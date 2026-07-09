@@ -1,13 +1,15 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
+const NEXT_PUBLIC_SUPABASE_URL="https://riutgkxgdvqusxjeppbc.supabase.co"
+const NEXT_PUBLIC_SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpdXRna3hnZHZxdXN4amVwcGJjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM0NTM1MjcsImV4cCI6MjA5OTAyOTUyN30.9Ys_utjtrVI2lV2GIuyTFaE1tvXO4-SntrFphjt2RZc"
 // Protects every /dashboard/* route: unauthenticated farmers are sent to /auth/login.
 export async function middleware(request: NextRequest) {
   let response = NextResponse.next({ request: { headers: request.headers } });
 
   const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+   NEXT_PUBLIC_SUPABASE_URL,
+    NEXT_PUBLIC_SUPABASE_ANON_KEY,
     {
       cookies: {
         get(name: string) {
